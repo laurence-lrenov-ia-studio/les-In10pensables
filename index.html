@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les In10pensables – Espace Entreprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --choco:     #3d2b1a;
+            --choco-mid: #6b4432;
+            --terra:     #c4541f;
+            --nude:      #f5ede3;
+            --nude-dark: #e8d8c4;
+            --page:      #fdfaf6;
+            --anthracite:#1c1814;
+            --grey:      #8a7a6e;
+            --white:     #ffffff;
+            --green:     #2d6a4f;
+            --green-bg:  #d8f3dc;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--page);
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--anthracite);
+            padding: 0 48px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .h-brand { display: flex; align-items: center; gap: 12px; }
+        .h-logo {
+            width: 34px; height: 34px;
+            background: var(--terra);
+            border-radius: 7px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .h-logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px; font-weight: 700;
+            color: var(--white);
+        }
+        .h-name { color: var(--nude); font-weight: 900; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+        .h-badge {
+            background: rgba(196,84,31,.2);
+            border: 1px solid rgba(196,84,31,.5);
+            color: var(--terra);
+            font-size: 9px; font-weight: 900;
+            letter-spacing: .2em; text-transform: uppercase;
+            padding: 5px 14px; border-radius: 20px;
+        }
+
+        /* ── LAYOUT ── */
+        .app-wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 52px 24px 80px;
+        }
+
+        /* ── PAGE TITLE ── */
+        .page-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .page-tag {
+            color: var(--terra);
+            font-size: 9px; font-weight: 900;
+            letter-spacing: .35em; text-transform: uppercase;
+            display: block; margin-bottom: 12px;
+        }
+        .page-title h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px; font-weight: 700;
+            color: var(--choco); line-height: 1.1;
+        }
+        .page-title p {
+            color: var(--grey);
+            font-size: 14px; margin-top: 10px; line-height: 1.6;
+        }
+
+        /* ── PROGRESS BAR ── */
+        .progress-wrap { margin-bottom: 40px; }
+        .progress-steps {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0;
+        }
+        .prog-step {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 8px; position: relative;
+        }
+        .prog-dot {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--nude-dark);
+            border: 2px solid var(--nude-dark);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 900;
+            color: var(--grey);
+            transition: all .3s;
+            position: relative; z-index: 2;
+        }
+        .prog-step.active .prog-dot {
+            background: var(--terra);
+            border-color: var(--terra);
+            color: var(--white);
+        }
+        .prog-step.done .prog-dot {
+            background: var(--choco);
+            border-color: var(--choco);
+            color: var(--white);
+        }
+        .prog-label {
+            font-size: 9px; font-weight: 900;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--grey); white-space: nowrap;
+        }
+        .prog-step.active .prog-label { color: var(--terra); }
+        .prog-step.done .prog-label { color: var(--choco); }
+
+        .prog-line {
+            width: 80px; height: 2px;
+            background: var(--nude-dark);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+            transition: background .3s;
+        }
+        .prog-line.done { background: var(--choco); }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--nude-dark);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px; font-weight: 700;
+            color: var(--choco); margin-bottom: 6px;
+        }
+        .card-sub { color: var(--grey); font-size: 13px; margin-bottom: 32px; }
+
+        /* ── FORM ELEMENTS ── */
+        .field { margin-bottom: 24px; }
+        .field label {
+            display: block;
+            color: var(--choco);
+            font-size: 11px; font-weight: 900;
+            letter-spacing: .1em; text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .field label .req { color: var(--terra); margin-left: 3px; }
+
+        .field input[type="text"],
+        .field input[type="email"],
+        .field input[type="tel"],
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 13px 16px;
+            background: var(--page);
+            border: 1px solid var(--nude-dark);
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: var(--choco);
+            transition: border .2s, box-shadow .2s;
+            appearance: none;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--terra);
+            box-shadow: 0 0 0 3px rgba(196,84,31,.12);
+        }
+        .field textarea { min-height: 80px; resize: vertical; }
+
+        /* Select custom arrow */
+        .select-wrap { position: relative; }
+        .select-wrap::after {
+            content: '▾';
+            position: absolute; right: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--terra); font-size: 14px;
+            pointer-events: none;
+        }
+        .select-wrap select { padding-right: 36px; }
+
+        /* Grid 2 colonnes */
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* ── OPTIONS VISUELLES (choix cartes) ── */
+        .opts { display: grid; gap: 12px; }
+        .opts.cols-2 { grid-template-columns: 1fr 1fr; }
+        .opts.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .opts.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .opt {
+            border: 2px solid var(--nude-dark);
+            border-radius: 10px;
+            padding: 16px 14px;
+            cursor: pointer;
+            transition: all .2s;
+            background: var(--page);
+            text-align: center;
+        }
+        .opt:hover { border-color: var(--choco-mid); background: var(--white); }
+        .opt.selected {
+            border-color: var(--terra);
+            background: rgba(196,84,31,.06);
+        }
+        .opt-icon { font-size: 22px; margin-bottom: 6px; display: block; }
+        .opt-label { color: var(--choco); font-size: 12px; font-weight: 700; }
+        .opt-sub { color: var(--grey); font-size: 10px; margin-top: 3px; }
+
+        /* ── MISSIONS CHECKLIST ── */
+        .missions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .mission-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--nude-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all .2s;
+            background: var(--page);
+        }
+        .mission-item:hover { border-color: var(--choco-mid); background: var(--white); }
+        .mission-item.checked {
+            border-color: var(--terra);
+            background: rgba(196,84,31,.05);
+        }
+        .mission-cb {
+            width: 18px; height: 18px;
+            border: 2px solid var(--nude-dark);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all .2s;
+            background: var(--white);
+        }
+        .mission-item.checked .mission-cb {
+            background: var(--terra);
+            border-color: var(--terra);
+        }
+        .mission-cb-check { color: var(--white); font-size: 11px; display: none; }
+        .mission-item.checked .mission-cb-check { display: block; }
+        .mission-label { color: var(--choco); font-size: 13px; font-weight: 500; }
+
+        .section-label {
+            color: var(--terra);
+            font-size: 9px; font-weight: 900;
+            letter-spacing: .2em; text-transform: uppercase;
+            margin: 20px 0 10px;
+            display: block;
+        }
+
+        /* ── RADIO TOGGLE ── */
+        .toggle-row { display: flex; gap: 10px; }
+        .toggle-btn {
+            flex: 1; padding: 12px;
+            border: 2px solid var(--nude-dark);
+            border-radius: 8px; cursor: pointer;
+            text-align: center;
+            font-size: 13px; font-weight: 700;
+            color: var(--grey);
+            background: var(--page);
+            transition: all .2s;
+        }
+        .toggle-btn:hover { border-color: var(--choco-mid); color: var(--choco); }
+        .toggle-btn.selected {
+            border-color: var(--terra);
+            color: var(--terra);
+            background: rgba(196,84,31,.06);
+        }
+
+        /* ── NAVIGATION BOUTONS ── */
+        .nav-btns {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 36px; padding-top: 28px;
+            border-top: 1px solid var(--nude-dark);
+        }
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--nude-dark);
+            border-radius: 8px;
+            padding: 13px 28px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px; font-weight: 700;
+            color: var(--grey);
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+        .btn-back:hover { border-color: var(--choco-mid); color: var(--choco); }
+
+        .btn-next {
+            background: var(--terra);
+            border: none; border-radius: 8px;
+            padding: 14px 36px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px; font-weight: 900;
+            color: var(--white);
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .1em; text-transform: uppercase;
+        }
+        .btn-next:hover { background: #a84318; transform: translateY(-1px); }
+        .btn-next:disabled { background: var(--nude-dark); color: var(--grey); transform: none; cursor: not-allowed; }
+
+        .btn-pdf {
+            background: var(--choco);
+            border: none; border-radius: 8px;
+            padding: 14px 36px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px; font-weight: 900;
+            color: var(--white);
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .1em; text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .btn-pdf:hover { background: #2a1d10; }
+
+        /* ── RÉCAP ── */
+        .recap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+        .recap-block {
+            background: var(--page);
+            border: 1px solid var(--nude-dark);
+            border-radius: 8px; padding: 16px 20px;
+        }
+        .recap-key { color: var(--terra); font-size: 9px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 6px; }
+        .recap-val { color: var(--choco); font-size: 14px; font-weight: 700; }
+
+        .recap-missions {
+            background: var(--page);
+            border: 1px solid var(--nude-dark);
+            border-radius: 8px; padding: 20px;
+            margin-bottom: 16px;
+        }
+        .recap-mission-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .recap-mission-tag {
+            background: rgba(196,84,31,.1);
+            border: 1px solid rgba(196,84,31,.3);
+            color: var(--terra);
+            font-size: 11px; font-weight: 700;
+            padding: 5px 12px; border-radius: 20px;
+        }
+
+        /* ── SUCCÈS ── */
+        .success-screen {
+            text-align: center; padding: 60px 40px;
+        }
+        .success-icon {
+            width: 72px; height: 72px;
+            background: var(--green-bg);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+        .success-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px; font-weight: 700;
+            color: var(--choco); margin-bottom: 12px;
+        }
+        .success-sub { color: var(--grey); font-size: 15px; line-height: 1.6; max-width: 480px; margin: 0 auto 32px; }
+
+        /* ── STEPS ── */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* ── PRINT / PDF ── */
+        @media print {
+            header, .progress-wrap, .nav-btns, .page-title, .btn-pdf, .btn-back, .btn-next { display: none !important; }
+            body { background: white; }
+            .card { border: none; box-shadow: none; padding: 0; }
+            .app-wrap { padding: 0; max-width: 100%; }
+            .recap-grid { break-inside: avoid; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            header { padding: 0 20px; }
+            .app-wrap { padding: 32px 16px 60px; }
+            .card { padding: 24px 20px; }
+            .field-row, .opts.cols-2, .opts.cols-3, .opts.cols-4 { grid-template-columns: 1fr; }
+            .missions-grid { grid-template-columns: 1fr; }
+            .prog-line { width: 40px; }
+            .recap-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="h-brand">
+        <div class="h-logo"><span>I</span></div>
+        <div class="h-name">Les In10pensables</div>
+    </div>
+    <div class="h-badge">Espace Entreprise</div>
+</header>
+
+<div class="app-wrap">
+
+    <!-- TITRE -->
+    <div class="page-title">
+        <span class="page-tag">Déposez votre besoin</span>
+        <h1>Trouvez votre assistant(e)<br>In10pensable</h1>
+        <p>Remplissez ce formulaire en 3 minutes. Notre réseau vous contacte sous 48h.</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+        <div class="progress-steps">
+            <div class="prog-step active" id="ps1">
+                <div class="prog-dot">1</div>
+                <div class="prog-label">Votre structure</div>
+            </div>
+            <div class="prog-line" id="pl1"></div>
+            <div class="prog-step" id="ps2">
+                <div class="prog-dot">2</div>
+                <div class="prog-label">Vos besoins</div>
+            </div>
+            <div class="prog-line" id="pl2"></div>
+            <div class="prog-step" id="ps3">
+                <div class="prog-dot">3</div>
+                <div class="prog-label">Vos missions</div>
+            </div>
+            <div class="prog-line" id="pl3"></div>
+            <div class="prog-step" id="ps4">
+                <div class="prog-dot">4</div>
+                <div class="prog-label">Récapitulatif</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ÉTAPE 1 — STRUCTURE
+    ═══════════════════════════════════════ -->
+    <div class="step active" id="step1">
+        <div class="card">
+            <h2 class="card-title">Votre structure</h2>
+            <p class="card-sub">Ces informations nous permettent de vous orienter vers le professionnel le plus adapté à votre besoin.</p>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Nom de l'entreprise <span class="req">★</span></label>
+                    <input type="text" id="nom_entreprise" placeholder="Batipro 33">
+                </div>
+                <div class="field">
+                    <label>Nom du contact <span class="req">★</span></label>
+                    <input type="text" id="nom_contact" placeholder="Jean Dupont">
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Email <span class="req">★</span></label>
+                    <input type="email" id="email" placeholder="contact@entreprise.fr">
+                </div>
+                <div class="field">
+                    <label>Téléphone</label>
+                    <input type="tel" id="telephone" placeholder="06 00 00 00 00">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Secteur d'activité <span class="req">★</span></label>
+                <div class="opts cols-4" id="opts_secteur">
+                    <div class="opt" onclick="selectOpt(this,'secteur','BTP / Construction')">
+                        <span class="opt-icon">🏗️</span>
+                        <div class="opt-label">BTP</div>
+                        <div class="opt-sub">Construction</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Immobilier')">
+                        <span class="opt-icon">🏠</span>
+                        <div class="opt-label">Immobilier</div>
+                        <div class="opt-sub">Transaction / Gestion</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Médical / Santé')">
+                        <span class="opt-icon">🏥</span>
+                        <div class="opt-label">Médical</div>
+                        <div class="opt-sub">Santé / Libéral</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Commerce / Retail')">
+                        <span class="opt-icon">🛒</span>
+                        <div class="opt-label">Commerce</div>
+                        <div class="opt-sub">Retail / E-commerce</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Juridique / Conseil')">
+                        <span class="opt-icon">⚖️</span>
+                        <div class="opt-label">Juridique</div>
+                        <div class="opt-sub">Conseil / Avocats</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Industrie / Logistique')">
+                        <span class="opt-icon">🏭</span>
+                        <div class="opt-label">Industrie</div>
+                        <div class="opt-sub">Logistique / Prod.</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Services aux entreprises')">
+                        <span class="opt-icon">💼</span>
+                        <div class="opt-label">Services B2B</div>
+                        <div class="opt-sub">Conseil / Agence</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'secteur','Autre secteur')">
+                        <span class="opt-icon">➕</span>
+                        <div class="opt-label">Autre</div>
+                        <div class="opt-sub">À préciser</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Taille de la structure <span class="req">★</span></label>
+                <div class="opts cols-4" id="opts_taille">
+                    <div class="opt" onclick="selectOpt(this,'taille','Artisan / Indépendant')">
+                        <span class="opt-icon">🔧</span>
+                        <div class="opt-label">Artisan</div>
+                        <div class="opt-sub">Indépendant</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'taille','TPE (1–9 salariés)')">
+                        <span class="opt-icon">🏪</span>
+                        <div class="opt-label">TPE</div>
+                        <div class="opt-sub">1–9 salariés</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'taille','PME (10–49 salariés)')">
+                        <span class="opt-icon">🏢</span>
+                        <div class="opt-label">PME</div>
+                        <div class="opt-sub">10–49 salariés</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'taille','ETI / Grand groupe')">
+                        <span class="opt-icon">🏛️</span>
+                        <div class="opt-label">ETI / GE</div>
+                        <div class="opt-sub">50+ salariés</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Avez-vous des salariés ? <span class="req">★</span></label>
+                <div class="toggle-row" id="toggle_salaries">
+                    <div class="toggle-btn" onclick="selectToggle(this,'salaries','Oui')">✓ &nbsp;Oui</div>
+                    <div class="toggle-btn" onclick="selectToggle(this,'salaries','Non')">✗ &nbsp;Non — je suis seul(e)</div>
+                    <div class="toggle-btn" onclick="selectToggle(this,'salaries','En cours de recrutement')">⟳ &nbsp;En cours de recrutement</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <div></div>
+            <button class="btn-next" onclick="goStep(2)">Étape suivante →</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ÉTAPE 2 — BESOINS
+    ═══════════════════════════════════════ -->
+    <div class="step" id="step2">
+        <div class="card">
+            <h2 class="card-title">Votre besoin administratif</h2>
+            <p class="card-sub">Comment imaginez-vous cette collaboration ?</p>
+
+            <div class="field">
+                <label>Volume horaire souhaité <span class="req">★</span></label>
+                <div class="opts cols-3" id="opts_volume">
+                    <div class="opt" onclick="selectOpt(this,'volume','Ponctuel (moins de 5h/mois)')">
+                        <span class="opt-icon">⚡</span>
+                        <div class="opt-label">Ponctuel</div>
+                        <div class="opt-sub">Moins de 5h / mois</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'volume','Régulier (5 à 20h/mois)')">
+                        <span class="opt-icon">📅</span>
+                        <div class="opt-label">Régulier</div>
+                        <div class="opt-sub">5 à 20h / mois</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'volume','Intensif (plus de 20h/mois)')">
+                        <span class="opt-icon">🔥</span>
+                        <div class="opt-label">Intensif</div>
+                        <div class="opt-sub">Plus de 20h / mois</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Mode d'intervention <span class="req">★</span></label>
+                <div class="opts cols-3" id="opts_mode">
+                    <div class="opt" onclick="selectOpt(this,'mode','À distance (télétravail)')">
+                        <span class="opt-icon">💻</span>
+                        <div class="opt-label">À distance</div>
+                        <div class="opt-sub">Télétravail</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'mode','Sur site (vos locaux)')">
+                        <span class="opt-icon">📍</span>
+                        <div class="opt-label">Sur site</div>
+                        <div class="opt-sub">Vos locaux</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'mode','Mixte (à définir ensemble)')">
+                        <span class="opt-icon">🔄</span>
+                        <div class="opt-label">Mixte</div>
+                        <div class="opt-sub">À définir ensemble</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Urgence du besoin</label>
+                <div class="opts cols-4" id="opts_urgence">
+                    <div class="opt" onclick="selectOpt(this,'urgence','Immédiat (cette semaine)')">
+                        <span class="opt-icon">🚨</span>
+                        <div class="opt-label">Immédiat</div>
+                        <div class="opt-sub">Cette semaine</div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'urgence','Sous 1 mois')">
+                        <span class="opt-icon">📆</span>
+                        <div class="opt-label">Sous 1 mois</div>
+                        <div class="opt-sub"></div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'urgence','Dans 1 à 3 mois')">
+                        <span class="opt-icon">🗓️</span>
+                        <div class="opt-label">1 à 3 mois</div>
+                        <div class="opt-sub"></div>
+                    </div>
+                    <div class="opt" onclick="selectOpt(this,'urgence','Je réfléchis encore')">
+                        <span class="opt-icon">💭</span>
+                        <div class="opt-label">En réflexion</div>
+                        <div class="opt-sub"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Contexte / Informations complémentaires</label>
+                <textarea id="contexte" placeholder="Décrivez votre situation, vos contraintes, ou tout ce qui nous aidera à mieux vous orienter…"></textarea>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(1)">← Retour</button>
+            <button class="btn-next" onclick="goStep(3)">Étape suivante →</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ÉTAPE 3 — MISSIONS
+    ═══════════════════════════════════════ -->
+    <div class="step" id="step3">
+        <div class="card">
+            <h2 class="card-title">Vos missions</h2>
+            <p class="card-sub">Sélectionnez toutes les tâches que vous souhaitez déléguer. Plusieurs choix possibles.</p>
+
+            <span class="section-label">Secrétariat & Administration générale</span>
+            <div class="missions-grid" id="missions-grid">
+
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Permanence téléphonique</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion du courrier & emails</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Rédaction & mise en forme de documents</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Classement & archivage</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion d'agenda & prise de RDV</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Rédaction de comptes-rendus</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Démarches & formalités administratives</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Saisie de données</span>
+                </div>
+
+                <span class="section-label" style="grid-column:1/-1; margin-top:8px;">Comptabilité & Finance</span>
+
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Pré-comptabilité & rapprochements bancaires</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Suivi de facturation & relances impayés</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion des notes de frais</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Suivi de trésorerie</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion des devis & commandes</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">DAF externalisé (Direction Admin. & Fin.)</span>
+                </div>
+
+                <span class="section-label" style="grid-column:1/-1; margin-top:8px;">Ressources Humaines</span>
+
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion administrative du personnel</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Préparation & suivi des contrats</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion des congés & absences</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Recrutement & onboarding</span>
+                </div>
+
+                <span class="section-label" style="grid-column:1/-1; margin-top:8px;">Relation Client & Commercial</span>
+
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Suivi client & CRM</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Assistance commerciale & ADV</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion des réclamations</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Organisation d'événements</span>
+                </div>
+
+                <span class="section-label" style="grid-column:1/-1; margin-top:8px;">Direction & Pilotage</span>
+
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Assistance de direction</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Office Manager externalisé</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Gestion de projets & coordination</span>
+                </div>
+                <div class="mission-item" onclick="toggleMission(this)">
+                    <div class="mission-cb"><span class="mission-cb-check">✓</span></div>
+                    <span class="mission-label">Tableaux de bord & reporting</span>
+                </div>
+
+            </div>
+
+            <div class="field" style="margin-top:8px;">
+                <label>Autre besoin spécifique</label>
+                <textarea id="autre_mission" placeholder="Précisez toute mission particulière liée à votre secteur ou à votre organisation…" style="min-height:60px;"></textarea>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(2)">← Retour</button>
+            <button class="btn-next" onclick="goStep(4)">Voir le récapitulatif →</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ÉTAPE 4 — RÉCAPITULATIF
+    ═══════════════════════════════════════ -->
+    <div class="step" id="step4">
+        <div class="card">
+            <h2 class="card-title">Récapitulatif de votre besoin</h2>
+            <p class="card-sub">Vérifiez les informations avant de transmettre votre dossier au réseau.</p>
+
+            <div class="recap-grid" id="recap-infos"></div>
+
+            <div class="recap-missions">
+                <div class="recap-key">Missions sélectionnées</div>
+                <div class="recap-mission-list" id="recap-missions-list"></div>
+            </div>
+
+            <div class="recap-missions" id="recap-autre-wrap" style="display:none;">
+                <div class="recap-key">Besoin complémentaire</div>
+                <div id="recap-autre" style="color:var(--choco);font-size:14px;margin-top:6px;line-height:1.6;"></div>
+            </div>
+
+            <div class="nav-btns">
+                <button class="btn-back" onclick="goStep(3)">← Modifier</button>
+                <button class="btn-pdf" onclick="genererPDF()">
+                    <span>📄</span> Générer le résumé PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ÉCRAN SUCCÈS (après PDF)
+    ═══════════════════════════════════════ -->
+    <div class="step" id="step5">
+        <div class="card">
+            <div class="success-screen">
+                <div class="success-icon">✅</div>
+                <h2 class="success-title">Votre dossier est prêt !</h2>
+                <p class="success-sub">Votre résumé PDF a été généré. Notre équipe va analyser votre besoin et vous recontacter sous 48h pour organiser un audit gratuit.</p>
+                <button class="btn-next" onclick="goStep(1); resetForm()">Déposer une nouvelle annonce</button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /app-wrap -->
+
+<script>
+    // ── STATE ──
+    const data = {
+        nom_entreprise: '', nom_contact: '', email: '', telephone: '',
+        secteur: '', taille: '', salaries: '',
+        volume: '', mode: '', urgence: '', contexte: '',
+        missions: [], autre_mission: ''
+    };
+
+    // ── NAVIGATION ──
+    function goStep(n) {
+        if (n === 4) buildRecap();
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + n).classList.add('active');
+        updateProgress(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress(n) {
+        for (let i = 1; i <= 4; i++) {
+            const ps = document.getElementById('ps' + i);
+            ps.classList.remove('active', 'done');
+            if (i < n) ps.classList.add('done');
+            else if (i === n) ps.classList.add('active');
+        }
+        for (let i = 1; i <= 3; i++) {
+            const pl = document.getElementById('pl' + i);
+            pl.classList.toggle('done', i < n);
+        }
+    }
+
+    // ── SÉLECTION OPTIONS ──
+    function selectOpt(el, key, val) {
+        const parent = el.closest('.opts');
+        parent.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        data[key] = val;
+    }
+
+    function selectToggle(el, key, val) {
+        const parent = el.closest('.toggle-row');
+        parent.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        data[key] = val;
+    }
+
+    // ── MISSIONS ──
+    function toggleMission(el) {
+        const label = el.querySelector('.mission-label').textContent;
+        el.classList.toggle('checked');
+        if (el.classList.contains('checked')) {
+            if (!data.missions.includes(label)) data.missions.push(label);
+        } else {
+            data.missions = data.missions.filter(m => m !== label);
+        }
+    }
+
+    // ── RÉCAP ──
+    function buildRecap() {
+        // Lire les champs texte
+        data.nom_entreprise = document.getElementById('nom_entreprise').value;
+        data.nom_contact    = document.getElementById('nom_contact').value;
+        data.email          = document.getElementById('email').value;
+        data.telephone      = document.getElementById('telephone').value;
+        data.contexte       = document.getElementById('contexte').value;
+        data.autre_mission  = document.getElementById('autre_mission').value;
+
+        const infos = [
+            { k: 'Entreprise',   v: data.nom_entreprise || '—' },
+            { k: 'Contact',      v: data.nom_contact || '—' },
+            { k: 'Email',        v: data.email || '—' },
+            { k: 'Téléphone',    v: data.telephone || '—' },
+            { k: 'Secteur',      v: data.secteur || '—' },
+            { k: 'Taille',       v: data.taille || '—' },
+            { k: 'Salariés',     v: data.salaries || '—' },
+            { k: 'Volume horaire', v: data.volume || '—' },
+            { k: 'Mode',         v: data.mode || '—' },
+            { k: 'Urgence',      v: data.urgence || '—' },
+        ];
+
+        document.getElementById('recap-infos').innerHTML = infos.map(i =>
+            `<div class="recap-block">
+                <div class="recap-key">${i.k}</div>
+                <div class="recap-val">${i.v}</div>
+            </div>`
+        ).join('');
+
+        const mList = document.getElementById('recap-missions-list');
+        if (data.missions.length) {
+            mList.innerHTML = data.missions.map(m =>
+                `<span class="recap-mission-tag">${m}</span>`
+            ).join('');
+        } else {
+            mList.innerHTML = '<span style="color:var(--grey);font-size:13px;">Aucune mission sélectionnée</span>';
+        }
+
+        const autreWrap = document.getElementById('recap-autre-wrap');
+        if (data.autre_mission.trim()) {
+            autreWrap.style.display = 'block';
+            document.getElementById('recap-autre').textContent = data.autre_mission;
+        } else {
+            autreWrap.style.display = 'none';
+        }
+    }
+
+    // ── GÉNÉRATION PDF ──
+    function genererPDF() {
+        // Injection du contenu imprimable
+        const pdfContent = buildPDFContent();
+        const printWin = window.open('', '_blank');
+        printWin.document.write(pdfContent);
+        printWin.document.close();
+        printWin.focus();
+        setTimeout(() => {
+            printWin.print();
+            printWin.close();
+        }, 400);
+        goStep(5);
+    }
+
+    function buildPDFContent() {
+        const date = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+        const missions = data.missions.length
+            ? data.missions.map(m => `<span style="display:inline-block;background:#f5e8dc;border:1px solid #c4541f;color:#c4541f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;margin:3px;">${m}</span>`).join('')
+            : '<em style="color:#8a7a6e;">Non renseigné</em>';
+
+        return `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+        <title>Dossier Besoin – Les In10pensables</title>
+        <style>
+            body { font-family: Arial, sans-serif; color: #3d2b1a; max-width: 700px; margin: 40px auto; padding: 0 24px; }
+            h1 { font-size: 26px; color: #3d2b1a; margin-bottom: 4px; }
+            .sub { color: #c4541f; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 32px; }
+            .section { margin-bottom: 28px; border-top: 2px solid #e8d8c4; padding-top: 16px; }
+            .section-title { color: #c4541f; font-size: 10px; font-weight: 900; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 14px; }
+            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+            .cell { background: #fdfaf6; border: 1px solid #e8d8c4; border-radius: 6px; padding: 10px 14px; }
+            .cell-key { color: #8a7a6e; font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4px; }
+            .cell-val { color: #3d2b1a; font-size: 13px; font-weight: 700; }
+            .footer { margin-top: 48px; border-top: 1px solid #e8d8c4; padding-top: 16px; color: #8a7a6e; font-size: 10px; display: flex; justify-content: space-between; }
+        </style></head><body>
+        <h1>Les In10pensables</h1>
+        <div class="sub">Dossier de besoin — Espace Entreprise</div>
+        <p style="font-size:12px;color:#8a7a6e;margin-bottom:32px;">Généré le ${date}</p>
+
+        <div class="section">
+            <div class="section-title">Identification</div>
+            <div class="grid">
+                <div class="cell"><div class="cell-key">Entreprise</div><div class="cell-val">${data.nom_entreprise||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Contact</div><div class="cell-val">${data.nom_contact||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Email</div><div class="cell-val">${data.email||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Téléphone</div><div class="cell-val">${data.telephone||'—'}</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Structure</div>
+            <div class="grid">
+                <div class="cell"><div class="cell-key">Secteur</div><div class="cell-val">${data.secteur||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Taille</div><div class="cell-val">${data.taille||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Salariés</div><div class="cell-val">${data.salaries||'—'}</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Modalités</div>
+            <div class="grid">
+                <div class="cell"><div class="cell-key">Volume horaire</div><div class="cell-val">${data.volume||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Mode</div><div class="cell-val">${data.mode||'—'}</div></div>
+                <div class="cell"><div class="cell-key">Urgence</div><div class="cell-val">${data.urgence||'—'}</div></div>
+            </div>
+            ${data.contexte ? `<div class="cell" style="margin-top:12px;"><div class="cell-key">Contexte</div><div class="cell-val" style="font-weight:400;line-height:1.6;">${data.contexte}</div></div>` : ''}
+        </div>
+
+        <div class="section">
+            <div class="section-title">Missions souhaitées (${data.missions.length})</div>
+            <div>${missions}</div>
+            ${data.autre_mission ? `<div class="cell" style="margin-top:14px;"><div class="cell-key">Besoin complémentaire</div><div class="cell-val" style="font-weight:400;">${data.autre_mission}</div></div>` : ''}
+        </div>
+
+        <div class="footer">
+            <span>Les In10pensables – Réseau Administratif Externalisé</span>
+            <span>Document confidentiel</span>
+        </div>
+        </body></html>`;
+    }
+
+    // ── RESET ──
+    function resetForm() {
+        Object.keys(data).forEach(k => {
+            if (k === 'missions') data[k] = [];
+            else data[k] = '';
+        });
+        document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+        document.querySelectorAll('.opt.selected, .toggle-btn.selected').forEach(el => el.classList.remove('selected'));
+        document.querySelectorAll('.mission-item.checked').forEach(el => el.classList.remove('checked'));
+        updateProgress(1);
+    }
+</script>
+</body>
+</html>
